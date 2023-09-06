@@ -1,39 +1,43 @@
 /* eslint-disable import/no-unresolved */
-// import fs from 'node:fs';
-// import path from 'node:path';
+import fs from 'node:fs';
+import path from 'node:path';
 import readline from 'node:readline/promises';
 import { fileURLToPath } from 'url';
 
-async function ask({ input = process.stdin, output = process.stdout }) {
+async function question(rl, query, defaultValue) {
+  const answer = await rl.question(`${query} ${defaultValue ? `(${defaultValue}) ` : ''}`);
+  return answer || defaultValue || '';
+}
+
+async function ask({ input = process.stdin, output = process.stdout, cwd = process.cwd() }) {
   const rl = readline.createInterface({
     input,
     output,
   });
 
-  // let pkg;
-  // if (fs.existsSync('./package.json')) {
-  //   // eslint-disable-next-line import/no-dynamic-require, global-require
-  //   pkg = JSON.parse(fs.readFileSync(path.join(process.cwd(), '/package.json'), 'utf8'));
-  //   // console.log(pkg);
-  // }
+  let pkg = {};
+  try {
+    pkg = JSON.parse(fs.readFileSync(path.join(cwd, '/package.json'), 'utf8'));
+  } catch (e) {
+    /* empty */
+  }
 
-  // console.log({ pkg });
+  const title = await question(rl, 'Title of the API?', pkg.name);
 
-  const title = await rl.question('Title of the API? ');
+  const version = await question(rl, 'Version number?', pkg.version);
 
-  const version = await rl.question('Version number? ');
+  const license = await question(rl, 'License?', pkg.license);
 
-  const license = await rl.question('License? ');
+  const url = await question(rl, 'Full base URL?');
 
-  const url = await rl.question('Full base URL? ');
+  const out = await question(rl, 'Output location?', 'openapi.json');
 
-  const out = await rl.question('Output location? ');
-
+  rl.close();
   return { title, version, license, url, out };
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  ask({});
+  ask({}).then(console.log);
 }
 
 export default ask;
