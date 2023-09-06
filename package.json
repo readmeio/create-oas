@@ -1,0 +1,24 @@
+{
+  "name": "create-oas",
+  "version": "1.0.0",
+  "description": "Create a new OAS file in your repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/readmeio/create-oas.git"
+  },
+  "keywords": [
+    "oas",
+    "readme",
+    "generation"
+  ],
+  "author": "Dom Harrington",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/readmeio/create-oas/issues"
+  },
+  "homepage": "https://github.com/readmeio/create-oas#readme"
+}
