@@ -1,6 +1,6 @@
 {
   "name": "create-oas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Create a new OAS file in your repository",
   "bin": "node ./bin/create-oas.js",
   "scripts": {
