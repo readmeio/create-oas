@@ -4,7 +4,7 @@
 import readline from 'node:readline/promises';
 import { fileURLToPath } from 'url';
 
-async function bin({ input = process.stdin, output = process.stdout }) {
+async function ask({ input = process.stdin, output = process.stdout }) {
   const rl = readline.createInterface({
     input,
     output,
@@ -33,7 +33,7 @@ async function bin({ input = process.stdin, output = process.stdout }) {
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  bin({});
+  ask({});
 }
 
-export default bin;
+export default ask;

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { PassThrough } from 'node:stream';
 import test from 'node:test';
 
-import bin from '../../bin/create-oas.js';
+import ask from '../../bin/create-oas.js';
 
 function getNextQuestion(output) {
   return new Promise(resolve => {
@@ -15,7 +15,7 @@ function getNextQuestion(output) {
 test('command line program accepts user input', async () => {
   const input = new PassThrough();
   const output = new PassThrough();
-  const promise = bin({ input, output });
+  const promise = ask({ input, output });
 
   assert.equal(await getNextQuestion(output), 'Title of the API? ');
   input.write('name\n');
