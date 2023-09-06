@@ -2,7 +2,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline/promises';
-import { fileURLToPath } from 'url';
+
+import esMain from 'es-main';
 
 import { createOas, writeFile } from '../index.js';
 
@@ -34,7 +35,7 @@ async function ask({ input = process.stdin, output = process.stdout, cwd = proce
   return { title, version, license, url, out };
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+if (esMain(import.meta)) {
   ask({})
     .then(createOas)
     .then(writeFile)

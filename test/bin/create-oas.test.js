@@ -1,3 +1,4 @@
+import { readFileSync } from 'fs';
 import assert from 'node:assert/strict';
 import { mkdtemp } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -5,6 +6,8 @@ import { PassThrough } from 'node:stream';
 import test from 'node:test';
 
 import ask from '../../bin/create-oas.js';
+
+const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
 function getNextQuestion(output) {
   return new Promise(resolve => {
@@ -49,7 +52,7 @@ test('should fetch defaults appropriately', async () => {
   const promise = ask({ input, output });
   assert.strictEqual(await getNextQuestion(output), 'Title of the API? (create-oas)');
   input.write('\n');
-  assert.strictEqual(await getNextQuestion(output), 'Version number? (1.0.0)');
+  assert.strictEqual(await getNextQuestion(output), `Version number? (${pkg.version})`);
   input.write('\n');
   assert.strictEqual(await getNextQuestion(output), 'License? (MIT)');
   input.write('\n');
@@ -60,7 +63,7 @@ test('should fetch defaults appropriately', async () => {
 
   assert.deepEqual(await promise, {
     title: 'create-oas',
-    version: '1.0.0',
+    version: pkg.version,
     license: 'MIT',
     url: 'https://example.com',
     out: 'openapi.json',
