@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import fs from 'node:fs';
 import path from 'node:path';
 import readline from 'node:readline/promises';

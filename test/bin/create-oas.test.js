@@ -90,7 +90,3 @@ test('should re-ask the same question if no answer or default given', async () =
 
   assert.strictEqual((await promise).url, 'https://example.com');
 });
-
-test.skip('should output the file to json if file extension is .json');
-
-test.skip('should output the file to yaml if file extension is .yaml/.yml');
