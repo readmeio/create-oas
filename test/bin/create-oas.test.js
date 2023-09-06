@@ -40,3 +40,11 @@ test('command line program accepts user input', async () => {
     out: 'openapi.json',
   });
 });
+
+test('should fetch defaults appropriately');
+
+test('should re-ask the same question if no answer or default given');
+
+test('should output the file to json if file extension is .json');
+
+test('should output the file to yaml if file extension is .yaml/.yml');
