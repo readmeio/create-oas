@@ -54,7 +54,7 @@ test('should fetch defaults appropriately', async () => {
   assert.strictEqual(await getNextQuestion(output), 'License? (MIT)');
   input.write('\n');
   assert.strictEqual(await getNextQuestion(output), 'Full base URL?');
-  input.write('\n');
+  input.write('https://example.com\n');
   assert.strictEqual(await getNextQuestion(output), 'Output location? (openapi.json)');
   input.write('\n');
 
@@ -62,7 +62,7 @@ test('should fetch defaults appropriately', async () => {
     title: 'create-oas',
     version: '1.0.0',
     license: 'MIT',
-    url: '',
+    url: 'https://example.com',
     out: 'openapi.json',
   });
 });
