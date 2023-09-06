@@ -6,7 +6,7 @@ import { fileURLToPath } from 'url';
 
 async function question(rl, query, defaultValue) {
   const answer = await rl.question(`${query} ${defaultValue ? `(${defaultValue}) ` : ''}`);
-  return answer || defaultValue || '';
+  return answer || defaultValue || question(rl, query, defaultValue);
 }
 
 async function ask({ input = process.stdin, output = process.stdout, cwd = process.cwd() }) {

@@ -67,7 +67,29 @@ test('should fetch defaults appropriately', async () => {
   });
 });
 
-test.skip('should re-ask the same question if no answer or default given');
+test('should re-ask the same question if no answer or default given', async () => {
+  const input = new PassThrough();
+  const output = new PassThrough();
+  const promise = ask({ input, output });
+
+  let question = '';
+
+  while (question !== 'Full base URL?') {
+    // eslint-disable-next-line no-await-in-loop
+    question = await getNextQuestion(output);
+    input.write('\n');
+  }
+
+  input.write('\n');
+  assert.strictEqual(await getNextQuestion(output), 'Full base URL?');
+  input.write('https://example.com\n');
+
+  await getNextQuestion(output);
+
+  input.write('\n');
+
+  assert.strictEqual((await promise).url, 'https://example.com');
+});
 
 test.skip('should output the file to json if file extension is .json');
 
