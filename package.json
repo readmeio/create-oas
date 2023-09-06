@@ -2,7 +2,7 @@
   "name": "create-oas",
   "version": "1.0.0",
   "description": "Create a new OAS file in your repository",
-  "main": "index.js",
+  "bin": "./bin/create-oas",
   "scripts": {
     "pretest": "eslint .",
     "test": "node --test"

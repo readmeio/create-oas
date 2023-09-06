@@ -3,6 +3,8 @@ import path from 'node:path';
 import readline from 'node:readline/promises';
 import { fileURLToPath } from 'url';
 
+import { createOas, writeFile } from '../index.js';
+
 async function question(rl, query, defaultValue) {
   const answer = await rl.question(`${query} ${defaultValue ? `(${defaultValue}) ` : ''}`);
   return answer || defaultValue || question(rl, query, defaultValue);
@@ -22,13 +24,9 @@ async function ask({ input = process.stdin, output = process.stdout, cwd = proce
   }
 
   const title = await question(rl, 'Title of the API?', pkg.name);
-
   const version = await question(rl, 'Version number?', pkg.version);
-
   const license = await question(rl, 'License?', pkg.license);
-
   const url = await question(rl, 'Full base URL?');
-
   const out = await question(rl, 'Output location?', 'openapi.json');
 
   rl.close();
@@ -36,7 +34,17 @@ async function ask({ input = process.stdin, output = process.stdout, cwd = proce
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  ask({}).then(console.log);
+  ask({})
+    .then(createOas)
+    .then(writeFile)
+    .then(() => {
+      process.exit(0);
+    })
+    .catch(e => {
+      // eslint-disable-next-line no-console
+      console.error('Error generating oas file', e.message);
+      process.exit(1);
+    });
 }
 
 export default ask;
