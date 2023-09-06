@@ -27,4 +27,26 @@ test('should create an oas file', () => {
   );
 });
 
-test.todo('should add version information if provided');
+test('should add version information if provided', () => {
+  assert.deepEqual(
+    createOas({
+      license: 'MIT',
+    }),
+    {
+      openapi: '3.1.0',
+      info: {
+        version: undefined,
+        title: undefined,
+        license: {
+          name: 'MIT',
+        },
+      },
+      servers: [
+        {
+          url: undefined,
+        },
+      ],
+      paths: {},
+    },
+  );
+});

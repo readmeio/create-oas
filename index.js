@@ -1,10 +1,9 @@
-function createOas({ title, version, license, url }) {
-  return {
+function createOas({ title, version, url, license }) {
+  const oas = {
     openapi: '3.1.0',
     info: {
-      version,
       title,
-
+      version,
     },
     servers: [
       {
@@ -14,9 +13,11 @@ function createOas({ title, version, license, url }) {
     paths: {},
   };
 
-  // license: {
-  //   name: license,
-  // },
+  if (license) {
+    oas.info.license = { name: license };
+  }
+
+  return oas;
 }
 
 export default createOas;
