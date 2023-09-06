@@ -4,5 +4,8 @@
   ],
   "rules": {
     "import/extensions": ["error", "always"]
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020
   }
 }
