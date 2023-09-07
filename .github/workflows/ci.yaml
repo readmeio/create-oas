@@ -26,3 +26,7 @@ jobs:
         # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
         env:
           TMPDIR: "$RUNNER_TEMP"
+      - name: Release
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
