@@ -51,5 +51,8 @@
       "@semantic-release/github",
       "@semantic-release/git"
     ]
+  },
+  "publishConfig": {
+    "provenance": true
   }
 }
