@@ -20,3 +20,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm test
+        # Exposing the github temp dir to node.js so it can be picked
+        # up in our tests by os.tmpdir()
+        # https://github.com/nodejs/node/blob/def014dff3b183902599a36bed056e6811e067cf/lib/os.js#L191
+        # https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables
+        env:
+          TMPDIR: "$RUNNER_TEMP"
