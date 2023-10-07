@@ -4,7 +4,7 @@ Create a new OAS file in your repository
 
 [![Build](https://github.com/readmeio/create-oas/workflows/CI/badge.svg)](https://github.com/readmeio/create-oas)
 
-[![](https://d3vv6lp55qjaqc.cloudfront.net/items/1M3C3j0I0s0j3T362344/Untitled-2.png)](https://readme.com)
+[![](https://raw.githubusercontent.com/readmeio/.github/main/oss-header.png)](https://readme.com)
 
 ## Installation/Usage
 
